@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import { AccountNav, AccountNavFallback } from '@/components/account-nav';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -8,25 +10,22 @@ export const metadata: Metadata = {
     'Descubre accesorios para tu escritorio y tus actividades diarias. Explora productos, precios y disponibilidad en KODIGO Store.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
       <body>
         <header className="site-header">
           <div className="container nav-wrap">
             <Link className="brand" href="/" aria-label="Ir al inicio de KODIGO Store">
-              <span className="brand-mark">
-                K<span>✳</span>
-              </span>
-              <span>
-                KODIGO<span className="brand-light">STORE</span>
-              </span>
+              <span className="brand-mark">K<span>✳</span></span>
+              <span>KODIGO<span className="brand-light">STORE</span></span>
             </Link>
             <nav aria-label="Navegación principal">
               <Link href="/">Inicio</Link>
               <Link href="/catalogo">Catálogo</Link>
+              <Suspense fallback={<AccountNavFallback />}>
+                <AccountNav />
+              </Suspense>
             </nav>
             <span className="demo-label">ACCESORIOS TECNOLÓGICOS</span>
           </div>

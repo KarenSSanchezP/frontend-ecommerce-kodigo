@@ -69,3 +69,40 @@ nav a:hover, .back-link:hover { color:var(--violet); }
 .error-page{min-height:65vh;padding-top:115px;max-width:700px;}.error-page h1{font-size:45px;font-weight:900;letter-spacing:-.04em;margin:18px 0}.error-page p{color:#706e80;line-height:1.7;margin:0 0 26px}.error-page code{font-size:12px;background:#eee9fa;padding:2px 4px;}.empty-message{padding:30px;border:1px dashed #d8d2e1;border-radius:12px;color:#6f6e80;}
 @media(max-width:1000px){.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{font-size:56px}.demo-label{display:none}.detail-grid{gap:25px}.detail-art{height:400px}}
 @media(max-width:700px){.container{width:min(100% - 32px,1200px)}.nav-wrap{height:70px}.nav-wrap nav{gap:16px}.nav-coming{display:none}.hero-wrap{grid-template-columns:1fr}.hero-copy{padding:66px 0 42px}.hero-graphic{min-height:300px}.hero-graphic-box{width:190px;height:198px}.hero-graphic-icon{font-size:71px}.orbit{width:260px;height:260px}.orbit-outer{width:340px;height:340px}.hero-pill{right:5%;bottom:5%;}.benefits-inner{flex-wrap:wrap;justify-content:center;font-size:9px}.catalog-section{padding-block:65px}.product-grid{grid-template-columns:1fr;gap:17px}.product-art{height:240px}.final-note{padding:28px;margin-bottom:55px}.note-star{font-size:30px}.footer-inner{padding:28px 0;flex-direction:column;min-height:auto;align-items:flex-start}.detail-grid{grid-template-columns:1fr}.detail-art{height:350px}.detail-emoji{font-size:115px}.inner-page{padding-block:45px 70px}.detail-content h1{font-size:39px}}
+
+/* Cuentas de cliente */
+.nav-signup { background:#28243c; color:#fff; border-radius:8px; padding:11px 14px; white-space:nowrap; }
+.nav-signup:hover { color:#fff; background:#6650c5; }
+.nav-account-link { white-space:nowrap; }
+.auth-shell { min-height:68vh; padding-block:70px 100px; display:grid; place-items:start center; }
+.auth-panel { width:min(100%, 510px); padding:40px; background:#fff; border:1px solid #e7e4ef; border-radius:18px; box-shadow:0 16px 35px #24203b0a; }
+.auth-panel h1 { font-weight:900; font-size:clamp(32px,4vw,47px); letter-spacing:-.06em; line-height:1.1; margin:15px 0; }
+.auth-description { color:#706e80; line-height:1.7; font-size:14px; margin-bottom:28px; }
+.auth-form { display:flex; flex-direction:column; gap:17px; }
+.auth-field { display:flex; flex-direction:column; gap:7px; font-weight:700; font-size:13px; }
+.auth-field input { display:block; width:100%; border:1px solid #dcd9e8; border-radius:9px; padding:13px 15px; background:#fff; outline-offset:2px; font-size:14px; }
+.auth-field input:focus-visible { outline:2px solid #7960df; border-color:#7960df; }
+.auth-field small { color:#757184; font-size:11px; line-height:1.5; font-weight:400; }
+.auth-submit { display:flex; justify-content:center; margin-top:5px; }
+.auth-submit:disabled { opacity:.65; cursor:wait; }
+.auth-small { font-size:13px; text-align:center; color:#706e80; }
+.auth-small a { color:#6550c8; font-weight:800; }
+.auth-error,.auth-success { padding:12px 14px; border-radius:8px; font-size:13px; line-height:1.5; margin:0; }
+.auth-error { background:#fff0f0; color:#973f3f; border:1px solid #f5d5d5; }
+.auth-success { background:#edf8f1; color:#25734a; border:1px solid #cde6d5; }
+.account-panel { width:min(100%, 620px); }
+.account-info { border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:15px 0; display:grid; gap:12px; }
+.account-info div { display:flex; justify-content:space-between; gap:18px; }
+.account-info dt { font-size:12px; color:#706e80; }
+.account-info dd { margin:0; font-size:13px; font-weight:700; overflow-wrap:anywhere; text-align:right; }
+.account-actions { display:flex; align-items:center; gap:14px; margin-top:25px; flex-wrap:wrap; }
+.btn-secondary { padding:15px 22px; font-size:13px; font-weight:800; background:#f0edf7; border:1px solid #dfd9ed; border-radius:9px; color:#3e365e; }
+.btn-secondary:hover { background:#e4ddf4; }
+@media(max-width:700px) {
+  .nav-wrap nav { gap:12px; font-size:12px; }
+  .nav-signup { display:none; }
+  .auth-shell { padding-block:45px 75px; }
+  .auth-panel { padding:26px 21px; }
+  .account-info div { display:block; }
+  .account-info dd { text-align:left; margin-top:4px; }
+}
