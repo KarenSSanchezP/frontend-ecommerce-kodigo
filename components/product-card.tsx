@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Product } from '@/lib/types';
 import { formatUSD } from '@/lib/products';
+import { AddToCartButton } from '@/components/add-to-cart-button';
 
 const art: Record<string, { icon: string; tone: string }> = {
   'TEC-001': { icon: '🖱️', tone: 'tone-lavender' },
@@ -24,6 +25,7 @@ export function ProductCard({ product }: { product: Product }) {
         <Link href={`/productos/${product.id}`} className="product-name">{product.name}</Link>
         <p className="product-description">{product.description || 'Un accesorio para tu espacio de trabajo.'}</p>
         <div className="product-bottom"><strong>{formatUSD(product.price_cents)}</strong><Link href={`/productos/${product.id}`} className="card-arrow" aria-label={`Ver detalle de ${product.name}`}>↗</Link></div>
+        <AddToCartButton product={product} compact />
       </div>
     </article>
   );

@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { formatUSD, getProduct } from '@/lib/products';
+import { AddToCartButton } from '@/components/add-to-cart-button';
 
 type Props = { params: Promise<{ id: string }> };
 
@@ -52,15 +53,9 @@ async function ProductDetails({ params }: Props) {
               ? `${product.stock} unidades disponibles`
               : 'Actualmente agotado'}
           </div>
-          <div className="next-stage-message">
-            <strong>Complementa tu espacio</strong>
-            <p>
-              ¿Buscas algo más? Descubre otros accesorios para acompañar
-              tu rutina de trabajo, estudio o entretenimiento.
-            </p>
-            <Link href="/catalogo" className="back-link">
-              Seguir explorando ↗
-            </Link>
+          <div className="detail-purchase">
+            <AddToCartButton product={product} />
+            <Link href="/carrito" className="back-link">Ver mi carrito →</Link>
           </div>
           <p className="detail-disclaimer">
             Precio en USD · Referencia: {product.sku} · Disponibilidad sujeta a cambios

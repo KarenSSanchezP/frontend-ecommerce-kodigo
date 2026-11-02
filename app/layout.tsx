@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Suspense } from 'react';
 import { AccountNav, AccountNavFallback } from '@/components/account-nav';
+import { CartNav } from '@/components/cart-nav';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <nav aria-label="Navegación principal">
               <Link href="/">Inicio</Link>
               <Link href="/catalogo">Catálogo</Link>
+              <CartNav />
               <Suspense fallback={<AccountNavFallback />}>
                 <AccountNav />
               </Suspense>
