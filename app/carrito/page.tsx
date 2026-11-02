@@ -65,7 +65,7 @@ export default function CartPage() {
             <div className="cart-summary-line"><span>Artículos</span><strong>{count}</strong></div>
             <div className="cart-summary-total"><span>Subtotal</span><strong>{formatUSD(totalCents)}</strong></div>
             <p>Los precios y las existencias se confirmarán antes de realizar el pedido.</p>
-            <Link href="/catalogo" className="btn-secondary cart-summary-link">Continuar explorando ↗</Link>
+            <Link href="/checkout" className="btn-primary cart-summary-link checkout-button">Continuar con mi pedido →</Link>
           </aside>
         </div>
       )}

@@ -21,7 +21,8 @@ async function AccountDetails() {
         <div><dt>Correo electrónico</dt><dd>{user.email}</dd></div>
       </dl>
       <div className="account-actions">
-        <Link href="/catalogo" className="btn-primary">Explorar productos →</Link>
+        <Link href="/pedidos" className="btn-primary">Mis pedidos →</Link>
+        <Link href="/catalogo" className="btn-secondary">Explorar productos</Link>
         <form action={logoutAction}>
           <button type="submit" className="btn-secondary">Cerrar sesión</button>
         </form>

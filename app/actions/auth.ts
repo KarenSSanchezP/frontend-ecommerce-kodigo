@@ -7,6 +7,11 @@ import { AUTH_COOKIE, apiBaseUrl, getSessionToken } from '@/lib/auth';
 
 export type AuthActionState = { error: string };
 
+function safeNext(value: FormDataEntryValue | null): string {
+  return value === '/checkout' || value === '/pedidos' ? value : '/cuenta';
+}
+
+
 function textField(data: FormData, key: string): string {
   const value = data.get(key);
   return typeof value === 'string' ? value.trim() : '';
@@ -88,7 +93,8 @@ export async function registerAction(
   if (result.status !== 201 || !result.body.success) {
     return { error: 'No se pudo crear la cuenta en este momento.' };
   }
-  redirect('/login?registered=1');
+  const next = safeNext(data.get('next'));
+  redirect(`/login?registered=1${next !== '/cuenta' ? `&next=${encodeURIComponent(next)}` : ''}`);
 }
 
 export async function loginAction(
@@ -131,7 +137,7 @@ export async function loginAction(
     maxAge: Math.min(Math.floor(auth.expires_in), 86400),
   });
   revalidatePath('/', 'layout');
-  redirect('/cuenta');
+  redirect(safeNext(data.get('next')));
 }
 
 export async function logoutAction(): Promise<void> {
