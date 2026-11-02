@@ -90,3 +90,49 @@ export async function cancelOrderAction(_prev: CancelOrderState, formData: FormD
   revalidatePath('/');
   return { error: '', success: true };
 }
+
+
+/** Inicia el pago de una orden existente sin crear otra ni marcarla como pagada. */
+export type StartPaymentState = { error: string; checkoutUrl: string | null };
+
+export async function startStripeCheckoutAction(
+  _previous: StartPaymentState,
+  formData: FormData
+): Promise<StartPaymentState> {
+  void _previous;
+  const fail = (error: string): StartPaymentState => ({ error, checkoutUrl: null });
+  const raw = formData.get('order_id');
+  const id = typeof raw === 'string' && /^\d{1,12}$/.test(raw) ? Number(raw) : 0;
+  if (!Number.isSafeInteger(id) || id < 1) return fail('El pedido no es válido.');
+
+  let response: Awaited<ReturnType<typeof authedPost<{ checkout_url: string }>>>;
+  try {
+    response = await authedPost<{ checkout_url: string }>(`/orders/${id}/checkout`);
+  } catch {
+    // Laravel reutiliza la sesión Stripe existente al reintentar.
+    return fail('No pudimos conectar con el servicio de pago. Revisa el estado de tu pedido antes de volver a intentar.');
+  }
+  if (response.status === 401) return fail('Tu sesión ha caducado. Inicia sesión nuevamente.');
+  if (response.status === 404) return fail('No encontramos este pedido en tu cuenta.');
+  if (response.status === 409) return fail('La sesión de pago ya no está disponible. Consulta el estado del pedido.');
+  if (response.status === 429) return fail('Demasiados intentos. Vuelve a probar más tarde.');
+  if (response.status === 503) return fail('Los pagos con tarjeta no están disponibles en este momento.');
+  if (response.status !== 200 || !response.data.success) {
+    return fail('No pudimos iniciar el pago. Inténtalo de nuevo más tarde.');
+  }
+
+  const target = response.data.data?.checkout_url;
+  if (typeof target !== 'string') return fail('No pudimos abrir el servicio de pago.');
+  try {
+    const url = new URL(target);
+    if (url.protocol !== 'https:' || url.hostname !== 'checkout.stripe.com' || !url.pathname.startsWith('/')) {
+      return fail('No pudimos validar la página de pago.');
+    }
+  } catch {
+    return fail('No pudimos validar la página de pago.');
+  }
+
+  revalidatePath(`/pedidos/${id}`);
+  revalidatePath('/pedidos');
+  return { error: '', checkoutUrl: target };
+}

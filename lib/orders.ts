@@ -71,7 +71,8 @@ export function orderStatus(status: string): string {
     case 'pending': return 'Pendiente de pago';
     case 'cancelled': return 'Cancelado';
     case 'expired': return 'Expirado';
-    case 'failed': return 'No completado';
+    case 'failed':
+    case 'payment_failed': return 'Pago no completado';
     default: return 'En revisión';
   }
 }

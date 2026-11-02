@@ -192,3 +192,9 @@ nav a:hover, .back-link:hover { color:var(--violet); }
 @media(max-width:700px){.checkout-items{padding:18px;}.order-list-row,.order-list-end,.order-details-head{align-items:flex-start;flex-direction:column;}.order-detail-list{padding-inline:16px;}.order-details-head>strong{font-size:25px;}}
 
 .orders-pagination{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px;font-size:13px;color:var(--muted);}
+
+/* Pago seguro */
+.stripe-checkout-form{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:20px;}
+.stripe-payment-button{min-width:230px;justify-content:center;}
+.stripe-payment-button:disabled{opacity:.65;cursor:wait;}
+.stripe-checkout-disclaimer{color:#706a7f!important;font-size:11px!important;margin:0!important;}
