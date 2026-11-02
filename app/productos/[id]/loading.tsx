@@ -1,0 +1,1 @@
+export default function LoadingProduct() { return <main className="container inner-page"><div className="skeleton-art detail-skeleton"/><div className="skeleton-line"/><div className="skeleton-line short"/></main>; }
